@@ -11,8 +11,9 @@ vim.keymap.set("n", "<leader>mr", function()
   local old_string = vim.fn.input("Find: ")
   local new_string = vim.fn.input("Replace with: ")
   vim.cmd('grep -rl "' .. old_string .. '" .')
-  vim.cmd("cfdo %s/" .. old_string .. "/" .. new_string .. "/gc | update")
+  vim.cmd("cfdo %s/" .. old_string .. "/" .. new_string .. "/gC | update")
 end, { desc = "Find & Replace in Directory" })
+
 vim.keymap.set("n", "<leader>fw", ":Telescope live_grep<CR>", { desc = "Find string in working dir" })
 
 vim.keymap.set({ "n", "v" }, "<leader>ma", function()
