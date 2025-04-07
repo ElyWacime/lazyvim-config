@@ -37,4 +37,5 @@ return {
   { "kvrohit/mellow.nvim" },
   { "nyoom-engineering/oxocarbon.nvim" },
   { "marko-cerovac/material.nvim" },
+  { "oxfist/night-owl.nvim" },
 }
