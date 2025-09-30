@@ -1,4 +1,3 @@
-
 return {
   "akinsho/toggleterm.nvim",
   version = "*",
@@ -33,23 +32,29 @@ return {
 
     -- Next terminal
     vim.keymap.set("n", "<leader>tv", function()
-      if #terminals == 0 then return end
+      if #terminals == 0 then
+        return
+      end
       index = index % #terminals + 1
       terminals[index]:toggle()
     end, { desc = "Next Terminal" })
 
     -- Previous terminal
     vim.keymap.set("n", "<leader>tc", function()
-      if #terminals == 0 then return end
+      if #terminals == 0 then
+        return
+      end
       index = (index - 2) % #terminals + 1
       terminals[index]:toggle()
     end, { desc = "Previous Terminal" })
 
     -- Close current terminal (Normal mode)
     vim.keymap.set("n", "<leader>tx", function()
-      if #terminals == 0 then return end
+      if #terminals == 0 then
+        return
+      end
       if terminals[index] then
-        terminals[index]:shutdown()  -- ✅ kill process + buffer
+        terminals[index]:shutdown() -- ✅ kill process + buffer
         table.remove(terminals, index)
         if index > #terminals then
           index = #terminals
@@ -65,9 +70,11 @@ return {
         true
       )
       vim.schedule(function()
-        if #terminals == 0 then return end
+        if #terminals == 0 then
+          return
+        end
         if terminals[index] then
-          terminals[index]:shutdown()  -- ✅ kill process + buffer
+          terminals[index]:shutdown() -- ✅ kill process + buffer
           table.remove(terminals, index)
           if index > #terminals then
             index = #terminals
@@ -82,4 +89,3 @@ return {
     ]])
   end,
 }
-

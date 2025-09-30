@@ -1,11 +1,23 @@
 return {
-  "zbirenbaum/copilot.lua",
-  cmd = "Copilot",
-  event = "InsertEnter",
-  config = function()
-    require("copilot").setup({
-      panel = { enabled = false }, -- Disable Copilot panel
-      suggestion = { enabled = false }, -- Disable inline text suggestions
-    })
-  end,
+  -- Copilot inline suggestions
+  {
+    "github/copilot.vim",
+    cmd = "Copilot",
+    build = ":Copilot setup",
+  },
+
+  -- Copilot Chat
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "github/copilot.vim" }, -- requires the official Copilot plugin
+    },
+    build = "make tiktoken", -- optional, for better token handling
+    config = function()
+      require("CopilotChat").setup({
+        debug = false,
+        show_help = "yes",
+      })
+    end,
+  },
 }

@@ -6,7 +6,12 @@
 -- vim.keymap.set("n", "<leader>me", "$", { desc = "Go to the end of the line" })
 -- Move to the first non-blank character in the line
 
-vim.keymap.set("n", "<leader>fw", ":Telescope live_grep<CR>", { desc = "Find string in working dir" })
+vim.keymap.set(
+  "n",
+  "<leader>fw",
+  ":Telescope live_grep<CR>",
+  { desc = "Find string in working dir" }
+)
 
 vim.keymap.set({ "n", "v" }, "<leader>ma", function()
   local line = vim.fn.getline(".") -- Get the current line
@@ -69,3 +74,43 @@ vim.keymap.set({ "n", "v" }, "<leader>me", function()
   -- Move cursor
   vim.api.nvim_win_set_cursor(0, { vim.fn.line("."), col })
 end, { desc = "Go to last non-comment character", silent = true })
+
+-- Copilot Chat keymaps
+local chat_ok, chat = pcall(require, "CopilotChat")
+if chat_ok then
+  -- Open Copilot Chat
+  vim.keymap.set(
+    "n",
+    "<leader>cc",
+    "<cmd>CopilotChat<cr>",
+    { desc = "Open Copilot Chat", silent = true }
+  )
+
+  -- Ask about selected code
+  vim.keymap.set(
+    "v",
+    "<leader>ca",
+    "<cmd>CopilotChat<cr>",
+    { desc = "Ask Copilot about selection", silent = true }
+  )
+
+  -- Explain selected code
+  vim.keymap.set("v", "<leader>ce", function()
+    chat.ask("Explain this code")
+  end, { desc = "Explain code with Copilot", silent = true })
+
+  -- Refactor selected code
+  vim.keymap.set("v", "<leader>cr", function()
+    chat.ask("Refactor this code")
+  end, { desc = "Refactor code with Copilot", silent = true })
+
+  -- Generate tests for selected code
+  vim.keymap.set("v", "<leader>ct", function()
+    chat.ask("Write unit tests for this code")
+  end, { desc = "Generate tests with Copilot", silent = true })
+
+  -- Explain the whole file
+  vim.keymap.set("n", "<leader>ch", function()
+    chat.ask("Explain what this file does")
+  end, { desc = "Explain file with Copilot", silent = true })
+end

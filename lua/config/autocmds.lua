@@ -11,33 +11,33 @@
 -- Ensure Treesitter highlighting always attaches on buffer enter
 
 vim.api.nvim_create_autocmd("BufEnter", {
-	callback = function()
-		local fname = vim.fn.expand("%:t")
-		local ext = fname:match("^.+%.(.+)$")
-		if ext then
-			local map = {
-				tsx = "tsx",
-				jsx = "javascriptreact",
-				js = "javascript",
-				ts = "typescript",
-				lua = "lua",
-				py = "python",
-				rb = "ruby",
-				php = "php",
-				html = "html",
-				css = "css",
-				json = "json",
-				yml = "yaml",
-				yaml = "yaml",
-				toml = "toml",
-				md = "markdown",
-				cpp = "cpp",
-				c = "c",
-				h = "c",
-			}
-			if map[ext] then
-				vim.bo.filetype = map[ext]
-			end
-		end
-	end,
+  callback = function()
+    local fname = vim.fn.expand("%:t")
+    local ext = fname:match("^.+%.(.+)$")
+    if ext then
+      local map = {
+        tsx = "tsx",
+        jsx = "javascriptreact",
+        js = "javascript",
+        ts = "typescript",
+        lua = "lua",
+        py = "python",
+        rb = "ruby",
+        php = "php",
+        html = "html",
+        css = "css",
+        json = "json",
+        yml = "yaml",
+        yaml = "yaml",
+        toml = "toml",
+        md = "markdown",
+        cpp = "cpp",
+        c = "c",
+        h = "c",
+      }
+      if map[ext] then
+        vim.bo.filetype = map[ext]
+      end
+    end
+  end,
 })
